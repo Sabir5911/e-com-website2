@@ -1,7 +1,6 @@
 "use client";
 import { urlForImage } from "../../../sanity/lib/image";
 import {  useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,14 +8,8 @@ import { PRODUCTS, Product } from "./sanityfetch";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/CartSlice";
 
-export const PRoductcard = ({ data,user_id }: { data :any ,user_id:string}) => {
+export const PRoductcard = ({ data,user_id }: { data :PRODUCTS[] ,user_id:string}) => {
 
-  
-const data1=data[0]
- data1.usre_id=user_id
-
-  
-console.log(data1,'product card console');
 
   const notify = () => toast.success(`Successfully Added!  `, {
     position: "top-center",
@@ -50,17 +43,12 @@ console.log(data1,'product card console');
     }
   };
   
-  data1.size=Size
-
-  data1.quantity=Quantity
-
-  console.log(data1,'data1');
-  
+ 
 
   const dispatch = useDispatch();
-  const addproducthandle = () => {
+  const addproducthandle = (data12:any) => {
     
-    dispatch(cartActions.addProduct({product:data1,quantity:Quantity}));
+    dispatch(cartActions.addProduct({product:data12,quantity:Quantity}));
   };
 
 
@@ -146,7 +134,20 @@ console.log(data1,'product card console');
 
               
                 <button
-                  onClick={()=>{handlepost(),addproducthandle()}}
+                  onClick={()=>{handlepost(),addproducthandle({
+
+                    user_id:user_id,
+                    size:Size,
+                    quantity:Quantity,
+                    name:data[0].name,
+                    title:data[0].title,
+                    category:data[0].category.name,
+                    _id:data[0]._id,
+                    image:data[0].image,
+                    price:data[0].price
+                  
+
+                  })}}
                   className="bg-blue-100 text-[#0000ff] px-4 py-3 rounded-md hover:shadow-xl font-semibold  text-base  "
                 >
                   ADD TO CART

@@ -11,6 +11,7 @@ export interface PRODUCTS{
 name:string
   }
   title:string
+
 } 
 
 
@@ -26,6 +27,7 @@ name:string
   title:string
 quantity:number
 size:string
+totalprice:string
 } 
 
 

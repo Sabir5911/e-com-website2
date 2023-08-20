@@ -14,7 +14,7 @@ const productCategory=async (category:string)=>{
 return(res) 
 }
 export default async function page({params}:{params:{category:string}}) {
-
+    
   const result:PRODUCTS[]= await productCategory(params.category)
   
   return <>
@@ -22,8 +22,8 @@ export default async function page({params}:{params:{category:string}}) {
 
   <div className='flex flex-wrap justify-evenly items-center  gap-x-6'>
 {
-  result.map((elm,i=0)=>(
-    <Link href={{pathname:`/soloproducts/${elm._id}`}} key={i+1}>
+  result.map((elm,i)=>(
+    <Link href={{pathname:`/soloproducts/${elm._id}`}} key={i}>
 <div className="mt-28" >
         <Image src={urlForImage(elm.image).url()} width={300} height={300}alt='Female cateogory' className='rounded-md'/>
         <h3 className="font-bold text-lg mt-3">{elm.name}</h3>
